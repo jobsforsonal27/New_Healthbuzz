@@ -1,0 +1,7 @@
+sqlalchemy
+python-jose[cryptography]==3.5.0
+dotenv
+uvicorn
+bcrypt==3.2.2
+
+
