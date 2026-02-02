@@ -13,3 +13,7 @@ class UserLogin(BaseModel):
 class Token(BaseModel):
     access_token : str
     token_type : str="Bearer"
+
+class ResetPasswordSchema(BaseModel):
+    email: EmailStr
+    new_password: str

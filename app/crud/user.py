@@ -19,4 +19,15 @@ def authenticate_user(db:Session, email:str, password:str):
         return None
     if not verify_pwd(password,user.hashed_pwd):
         return None
-    return user 
+    return user
+
+def reset_password(db:Session, email:str,password:str):
+    user=db.query(User).filter(User.email==email).first()
+    if not user:
+        raise ValueError("User not found")
+    else:
+        user.hashed_pwd=hash_pass(password)
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+    return user

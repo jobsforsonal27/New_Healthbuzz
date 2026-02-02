@@ -1,12 +1,16 @@
 from fastapi import FastAPI
 from app.api.auth import router as auth_router
-from app.core.database import engine, BASE
+from app.api.patient import router as patient_router
+from app.core.database import BASE,engine
+
+
 
 BASE.metadata.create_all(bind=engine)
 
-app= FastAPI(title="Auth Services")
-app.include_router(auth_router)
+app = FastAPI(title= "Auth Services")
 
+app.include_router(auth_router)
+app.include_router(patient_router)
 
 
 

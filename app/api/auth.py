@@ -1,10 +1,11 @@
 from fastapi import APIRouter,Depends,HTTPException
 from sqlalchemy.orm import Session
 
+from app.crud import user
 
+from app.schemas.user import ResetPasswordSchema, UserCreate,Token,UserLogin,ResetPasswordSchema
+from app.crud.user import create_user,authenticate_user,reset_password
 
-from app.schemas.user import UserCreate,Token,UserLogin
-from app.crud.user import create_user,authenticate_user
 from app.core.database import get_db
 from app.core.security import create_access_token
 
@@ -22,6 +23,11 @@ def login(user:UserLogin,db:Session=Depends(get_db)):
     access_token=create_access_token(data={"sub":db_user.email})
     return {"access_token":access_token,"token_type":"bearer"}
 
+@router.put("/reset_password")
+def Password(data: ResetPasswordSchema,db: Session = Depends(get_db)):
+    print("calling reset password  ")
+    db_user=reset_password(db,data.email,data.new_password)
+    return db_user
 
 
 

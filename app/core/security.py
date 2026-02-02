@@ -9,6 +9,7 @@ pwd_pattern=CryptContext(schemes=["bcrypt"])
 
 def hash_pass(password:str)->str:
     return pwd_pattern.hash(password)
+    
 
 def verify_pwd(password:str, hashed:str)->bool:
     return pwd_pattern.verify(password,hashed)
