@@ -2,12 +2,22 @@ from fastapi import FastAPI
 from app.api.auth import router as auth_router
 from app.api.patient import router as patient_router
 from app.core.database import BASE,engine
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-
+app = FastAPI()
 
 BASE.metadata.create_all(bind=engine)
 
 app = FastAPI(title= "Auth Services")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(auth_router)
 app.include_router(patient_router)
