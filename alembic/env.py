@@ -24,6 +24,8 @@ if config.config_file_name is not None:
 from app.core.database import BASE
 from app.models.users import User
 from app.models.patients import Patient
+from app.models.doctor import Doctor
+from app.models.appointment import Appointment
 target_metadata = BASE.metadata
 
 # other values from the config, defined by the needs of env.py,

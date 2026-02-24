@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from app.api.auth import router as auth_router
 from app.api.patient import router as patient_router
+from app.api.doctor import router as doctor_router
+from app.api.appointment import router as appointment_router
 from app.core.database import BASE,engine
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,6 +23,8 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(patient_router)
+app.include_router(doctor_router)
+app.include_router(appointment_router)
 
 
 
